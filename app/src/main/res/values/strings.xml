@@ -1,0 +1,9 @@
+<resources>
+            <!-- MainActivity-->
+    <string name="app_name">TikTakToe</string>
+    <string name="reiniciar">Reiniciar Tablero</string>
+    <string name="text_view_player1">Player 1 :</string>
+    <string name="text_view_player2">Player 2 :</string>
+    <string name="text_view_player1_score"> 0</string>
+    <string name="text_view_player2_score"> 0</string>
+</resources>
