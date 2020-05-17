@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
+        //If button hasn't been clicked, do nothing
         if (!((Button) v).getText().toString().equals("")) {
             return;
         }
