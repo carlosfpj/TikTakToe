@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,10 +11,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button[][] mgridButtons = new Button[3][3];
-    private Button mrestartBoard;
+    private Button mrestartBoard, mrestartGame;
     private boolean player1Turn = true;
     private int count, player1Points, player2Points;
     private TextView player1Score, player2Score;
+    private boolean isGridLocked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +29,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             player1Turn = savedInstanceState.getBoolean("turn");
             count = savedInstanceState.getInt("count");
             updateScore(player1Points, player2Points);
+            isGridLocked = savedInstanceState.getBoolean("isGridLocked");
+            if (isGridLocked){
+                lockGrid();
+            }
         }
         bindViews();
+        updateScore(player1Points, player2Points);
     }
 
     private void bindViews() {
         mrestartBoard = findViewById(R.id.btn_reiniciar);
+        mrestartGame = findViewById(R.id.btn_reiniciar_juego);
         player1Score = findViewById(R.id.text_view_player1);
         player2Score = findViewById(R.id.text_view_player2);
 
@@ -47,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mgridButtons[i][j].setText("");
                         player1Turn = true;
                         count = 0;
-                        enableGrid();
+                        unlockGrid();
                     }
             }
         });
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putInt("player2Points", player2Points);
         bundle.putBoolean("turn", player1Turn);
         bundle.putInt("count", count);
+        bundle.putBoolean("isGridLocked", isGridLocked);
 
         String[][] field = new String[3][3];
         for (int i = 0; i < 3; i++) {
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        //If button hasn't been clicked, do nothing
+        //If button has a different string than "", do nothing
         if (!((Button) v).getText().toString().equals("")) {
             return;
         }
@@ -103,11 +110,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             playerWins(player1Turn);
             updateScore(player1Points, player2Points);
-            disablegrid();
+            lockGrid();
         }
         else if (count == 9) {
             draw();
-            disablegrid();
+            lockGrid();
         }
         player1Turn = !player1Turn;
     }
@@ -170,23 +177,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void updateScore(int score1, int score2){
         String printedScore1 = String.valueOf(score1);
         String printedScore2 = String.valueOf(score2);
-        player1Score.setText("Player 1: " + printedScore1 + "Points");
-        player2Score.setText("Player 2: "+ printedScore2 + "points");
+        if(score1 == 0 && score2 == 0){
+            player1Score.setText(R.string.default_text_player_1);
+            player2Score.setText(R.string.default_text_player_2);
+        }else{
+            player1Score.setText("Player 1: " + printedScore1 + "Points");
+            player2Score.setText("Player 2: "+ printedScore2 + "points");
+        }
+
     }
 
-    private void disablegrid(){
+    private boolean lockGrid(){
         for (int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 mgridButtons[i][j].setEnabled(false);
             }
         }
+        isGridLocked = true;
+        return isGridLocked;
     }
 
-    private void enableGrid(){
+    private boolean unlockGrid(){
         for (int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 mgridButtons[i][j].setEnabled(true);
             }
         }
+        isGridLocked = false;
+        return isGridLocked;
+    }
+
+
+    public void reiniciarJuego(View view) {
+        player1Points = 0;
+        player2Points = 0;
+        updateScore(player1Points, player2Points);
+        for (int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                mgridButtons[i][j].setText("");
+            }
+        }
+        unlockGrid();
     }
 }

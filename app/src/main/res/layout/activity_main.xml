@@ -94,11 +94,27 @@
             android:text=""
             android:freezesText="true"/>
     </GridLayout>
-    <Button
-        android:id="@+id/btn_reiniciar"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/reiniciar"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginTop="75dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btn_reiniciar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/reiniciar"/>
+
+        <Button
+            android:id="@+id/btn_reiniciar_juego"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:onClick="reiniciarJuego"
+            android:text="@string/reiniciar_juego"/>
+    </LinearLayout>
 </LinearLayout>

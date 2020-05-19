@@ -2,8 +2,9 @@
             <!-- MainActivity-->
     <string name="app_name">TikTakToe</string>
     <string name="reiniciar">Reiniciar Tablero</string>
+    <string name="reiniciar_juego">Reiniciar Juego</string>
     <string name="text_view_player1">Player 1 :</string>
     <string name="text_view_player2">Player 2 :</string>
-    <string name="text_view_player1_score"> 0</string>
-    <string name="text_view_player2_score"> 0</string>
+    <string name="default_text_player_1">Player 1: 0 points</string>
+    <string name="default_text_player_2">Player 2: 0 points</string>
 </resources>
