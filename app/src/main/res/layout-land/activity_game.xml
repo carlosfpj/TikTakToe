@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".GameActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,20 +110,20 @@
         </GridLayout>
 
         <Button
-            android:id="@+id/btn_reiniciar"
+            android:id="@+id/btn_restart_board"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:text="@string/reiniciar" />
+            android:text="@string/restart_board" />
 
         <Button
-            android:id="@+id/btn_reiniciar_juego"
+            android:id="@+id/btn_restart_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:onClick="reiniciarJuego"
-            android:text="@string/reiniciar_juego"/>
+            android:text="@string/restart_game"/>
     </RelativeLayout>
 
 </LinearLayout>

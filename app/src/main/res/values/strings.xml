@@ -1,10 +1,15 @@
 <resources>
-            <!-- MainActivity-->
-    <string name="app_name">TikTakToe</string>
-    <string name="reiniciar">Reiniciar Tablero</string>
-    <string name="reiniciar_juego">Reiniciar Juego</string>
-    <string name="text_view_player1">Player 1 :</string>
-    <string name="text_view_player2">Player 2 :</string>
-    <string name="default_text_player_1">Player 1: 0 points</string>
-    <string name="default_text_player_2">Player 2: 0 points</string>
+    <!-- GameActivity-->
+    <string name="app_name">TicTacToe</string>
+    <string name="restart_board">Reiniciar Tablero</string>
+    <string name="restart_game">Reiniciar Juego</string>
+    <string name="text_view_player1">Jugador 1 :</string>
+    <string name="text_view_player2">Jugador 2 :</string>
+    <string name="default_text_player_1">Jugador 1: 0 puntos</string>
+    <string name="default_text_player_2">Jugador 2: 0 puntos</string>
+
+    <!--MainActivity-->
+    <string name="tv_game_name">Tic Tac Toe</string>
+    <string name="btn_exit">Salir</string>
+    <string name="btn_play">Jugar</string>
 </resources>
