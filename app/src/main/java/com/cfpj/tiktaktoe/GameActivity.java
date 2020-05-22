@@ -1,5 +1,7 @@
 package com.cfpj.tiktaktoe;
 
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener , SetNamesDialogFragment.SetNamesDialogListener {
 
     private Button[][] mgridButtons = new Button[3][3];
     private Button mrestartBoard, mrestartGame;
@@ -176,6 +178,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         toast.show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DialogFragment dialogFragment = new SetNamesDialogFragment();
+        dialogFragment.show(getSupportFragmentManager(), "MyDialog");
+    }
+
     private void updateScore(int score1, int score2){
         String printedScore1 = String.valueOf(score1);
         String printedScore2 = String.valueOf(score2);
@@ -220,5 +229,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         unlockGrid();
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Toast toast = Toast.makeText(this, "Funcionó el click en el dialogo", Toast.LENGTH_LONG);
+        toast.show();
+
+
     }
 }
