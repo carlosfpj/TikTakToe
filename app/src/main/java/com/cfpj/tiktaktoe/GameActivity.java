@@ -232,10 +232,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        Toast toast = Toast.makeText(this, "Funcionó el click en el dialogo", Toast.LENGTH_LONG);
-        toast.show();
-
+    public void onDialogPositiveClick(DialogFragment dialog, String name1, String name2) {
+        player1Score.setText(name1);
+        player2Score.setText(name2);
 
     }
 }
