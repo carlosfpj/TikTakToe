@@ -8,11 +8,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class SetNamesDialogFragment extends DialogFragment {
 
+    private TextView tvAlert;
     private EditText etPlayer1Name, etPlayer2Name;
+    private Button btnAccept;
 
     public interface SetNamesDialogListener {
         void onDialogPositiveClick(DialogFragment dialog, String name1, String name2);
@@ -31,7 +35,7 @@ public class SetNamesDialogFragment extends DialogFragment {
     }
 
     @Override
-    public Dialog onCreateDialog( Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -40,14 +44,25 @@ public class SetNamesDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_setnamesdialog, null);
         etPlayer1Name = view.findViewById(R.id.et_player_1_name);
         etPlayer2Name = view.findViewById(R.id.et_player_2_name);
+        tvAlert = view.findViewById(R.id.tv_alert);
+        tvAlert.setVisibility(View.GONE);
+        btnAccept = view.findViewById(R.id.btn_accept);
         builder.setView(view);
 
-        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+        btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
+
                 String name1 = etPlayer1Name.getText().toString();
                 String name2 = etPlayer2Name.getText().toString();
-                listener.onDialogPositiveClick(SetNamesDialogFragment.this, name1, name2);
+
+                if(name1.length() < 1 || name2.length() < 1){
+                    tvAlert.setVisibility(View.VISIBLE);
+                    tvAlert.setText(R.string.noNameAlertMessage);
+                }else {
+                    listener.onDialogPositiveClick(SetNamesDialogFragment.this, name1, name2);
+                    dismiss();
+                }
             }
         });
         return builder.create();

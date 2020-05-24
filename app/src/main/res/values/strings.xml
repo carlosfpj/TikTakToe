@@ -18,5 +18,6 @@
     <string name="et_player_1_name">Nombre jugador 1</string>
     <string name="et_player_2_name">Nombre jugador 2</string>
     <string name="accept">Aceptar</string>
+    <string name="noNameAlertMessage">Debes introducir nombres en cada casilla.</string>
 
 </resources>
