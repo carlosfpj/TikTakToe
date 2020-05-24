@@ -1,7 +1,6 @@
 package com.cfpj.tiktaktoe;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +17,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int count, player1Points, player2Points;
     private TextView player1Score, player2Score;
     private boolean isGridLocked;
+    String dialogName1, dialogName2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         bindViews();
-        updateScore(player1Points, player2Points);
     }
 
     private void bindViews() {
@@ -164,11 +163,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void playerWins(boolean turn){
         if(turn){
-            Toast toast = Toast.makeText(this, "Player 1 wins", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, dialogName1 + " wins", Toast.LENGTH_SHORT);
             toast.show();
         }
         else{
-            Toast toast = Toast.makeText(this, "Player 2 wins", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, dialogName2 + " wins", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
@@ -186,14 +185,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateScore(int score1, int score2){
+
         String printedScore1 = String.valueOf(score1);
         String printedScore2 = String.valueOf(score2);
+
         if(score1 == 0 && score2 == 0){
-            player1Score.setText(R.string.default_text_player_1);
-            player2Score.setText(R.string.default_text_player_2);
-        }else{
-            player1Score.setText("Jugador 1: " + printedScore1 + " puntos");
-            player2Score.setText("Jugador 2: "+ printedScore2 + " puntos");
+            player1Score.setText(dialogName1 + ": " + printedScore1 + " puntos");
+            player2Score.setText(dialogName2 + ": " + printedScore2 + " puntos");
+        } else{
+            player1Score.setText(dialogName1 + ": " + printedScore1 + " puntos");
+            player2Score.setText(dialogName2 + ": " + printedScore2 + " puntos");
         }
 
     }
@@ -219,7 +220,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void reiniciarJuego(View view) {
+    public void restartGame(View view) {
         player1Points = 0;
         player2Points = 0;
         updateScore(player1Points, player2Points);
@@ -233,8 +234,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String name1, String name2) {
-        player1Score.setText(name1);
-        player2Score.setText(name2);
+        dialogName1 = name1;
+        dialogName2 = name2;
+
+        player1Score.setText(dialogName1 + " 0 puntos");
+        player2Score.setText(dialogName2 + " 0 puntos");
 
     }
 }
