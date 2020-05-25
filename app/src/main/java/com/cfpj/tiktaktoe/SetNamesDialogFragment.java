@@ -2,7 +2,6 @@ package com.cfpj.tiktaktoe;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -17,18 +16,19 @@ public class SetNamesDialogFragment extends DialogFragment {
     private TextView tvAlert;
     private EditText etPlayer1Name, etPlayer2Name;
     private Button btnAccept;
+    private iSetNamesDialogListener listener;
 
-    public interface SetNamesDialogListener {
-        void onDialogPositiveClick(DialogFragment dialog, String name1, String name2);
+
+    public interface iSetNamesDialogListener {
+        void onDialogAcceptClick(DialogFragment dialog, String name1, String name2);
     }
 
-    SetNamesDialogListener listener;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            listener = (SetNamesDialogListener) context;
+            listener = (iSetNamesDialogListener) context;
         }catch (ClassCastException e){
             throw new ClassCastException(GameActivity.class.toString() + " must implement SetNamesDialogFragment");
         }
@@ -60,7 +60,7 @@ public class SetNamesDialogFragment extends DialogFragment {
                     tvAlert.setVisibility(View.VISIBLE);
                     tvAlert.setText(R.string.noNameAlertMessage);
                 }else {
-                    listener.onDialogPositiveClick(SetNamesDialogFragment.this, name1, name2);
+                    listener.onDialogAcceptClick(SetNamesDialogFragment.this, name1, name2);
                     dismiss();
                 }
             }

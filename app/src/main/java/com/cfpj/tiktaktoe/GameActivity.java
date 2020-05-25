@@ -3,13 +3,14 @@ package com.cfpj.tiktaktoe;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener , SetNamesDialogFragment.SetNamesDialogListener {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener , iSetNamesDialogListener {
 
     private Button[][] mgridButtons = new Button[3][3];
     private Button mrestartBoard, mrestartGame;
@@ -26,7 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             bindViews();
             player1Points = savedInstanceState.getInt("player1Points");
             player2Points = savedInstanceState.getInt("player2Points");
@@ -34,7 +35,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             count = savedInstanceState.getInt("count");
             updateScore(player1Points, player2Points);
             isGridLocked = savedInstanceState.getBoolean("isGridLocked");
-            if (isGridLocked){
+            if (isGridLocked) {
                 lockGrid();
             }
         }
@@ -51,8 +52,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
-                for(int i=0; i<3; i++)
-                    for (int j=0; j<3; j++){
+                for (int i = 0; i < 3; i++)
+                    for (int j = 0; j < 3; j++) {
                         mgridButtons[i][j].setText("");
                         player1Turn = true;
                         count = 0;
@@ -104,18 +105,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         count++;
 
-        if (checkForWin()){
-            if (player1Turn){
+        if (checkForWin()) {
+            if (player1Turn) {
                 player1Points++;
-            }
-            else {
+            } else {
                 player2Points++;
             }
             playerWins(player1Turn);
             updateScore(player1Points, player2Points);
             lockGrid();
-        }
-        else if (count == 9) {
+        } else if (count == 9) {
             draw();
             lockGrid();
         }
@@ -149,30 +148,29 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (field[0][0].equals(field[1][1])
                 && field[0][0].equals(field[2][2])
-                && !field[0][0].equals("")){
+                && !field[0][0].equals("")) {
             return true;
         }
 
         if (field[0][2].equals(field[1][1])
                 && field[0][2].equals(field[2][0])
-                && !field[0][2].equals("")){
+                && !field[0][2].equals("")) {
             return true;
         }
         return false;
     }
 
-    private void playerWins(boolean turn){
-        if(turn){
+    private void playerWins(boolean turn) {
+        if (turn) {
             Toast toast = Toast.makeText(this, dialogName1 + " wins", Toast.LENGTH_SHORT);
             toast.show();
-        }
-        else{
+        } else {
             Toast toast = Toast.makeText(this, dialogName2 + " wins", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
 
-    private void draw(){
+    private void draw() {
         Toast toast = Toast.makeText(this, "Draw", Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -184,24 +182,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         dialogFragment.show(getSupportFragmentManager(), "MyDialog");
     }
 
-    private void updateScore(int score1, int score2){
+    private void updateScore(int score1, int score2) {
 
         String printedScore1 = String.valueOf(score1);
         String printedScore2 = String.valueOf(score2);
 
-        if(score1 == 0 && score2 == 0){
+        if (score1 == 0 && score2 == 0) {
             player1Score.setText(dialogName1 + ": " + printedScore1 + " puntos");
             player2Score.setText(dialogName2 + ": " + printedScore2 + " puntos");
-        } else{
+        } else {
             player1Score.setText(dialogName1 + ": " + printedScore1 + " puntos");
             player2Score.setText(dialogName2 + ": " + printedScore2 + " puntos");
         }
-
     }
 
-    private boolean lockGrid(){
-        for (int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
+    private boolean lockGrid() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 mgridButtons[i][j].setEnabled(false);
             }
         }
@@ -209,9 +206,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         return isGridLocked;
     }
 
-    private boolean unlockGrid(){
-        for (int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
+    private boolean unlockGrid() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 mgridButtons[i][j].setEnabled(true);
             }
         }
@@ -219,26 +216,26 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         return isGridLocked;
     }
 
-
     public void restartGame(View view) {
         player1Points = 0;
         player2Points = 0;
         updateScore(player1Points, player2Points);
-        for (int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 mgridButtons[i][j].setText("");
             }
         }
         unlockGrid();
     }
 
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog, String name1, String name2) {
+    public void onDialogAcceptClick(DialogFragment dialog, String name1, String name2) {
+
         dialogName1 = name1;
         dialogName2 = name2;
 
         player1Score.setText(dialogName1 + " 0 puntos");
         player2Score.setText(dialogName2 + " 0 puntos");
+        dialog.dismiss();
 
     }
 }
