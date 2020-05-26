@@ -30,7 +30,7 @@ public class SetNamesDialogFragment extends DialogFragment {
         try{
             listener = (iSetNamesDialogListener) context;
         }catch (ClassCastException e){
-            throw new ClassCastException(GameActivity.class.toString() + " must implement SetNamesDialogFragment");
+            throw new ClassCastException(GameActivity.class.toString() + " must implement iSetNamesDialogListener");
         }
     }
 
@@ -47,6 +47,7 @@ public class SetNamesDialogFragment extends DialogFragment {
         tvAlert = view.findViewById(R.id.tv_alert);
         tvAlert.setVisibility(View.GONE);
         btnAccept = view.findViewById(R.id.btn_accept);
+        builder.setTitle("Introduce los nombres de los jugadores");
         builder.setView(view);
 
         btnAccept.setOnClickListener(new View.OnClickListener() {

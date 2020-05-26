@@ -1,16 +1,17 @@
 package com.cfpj.tiktaktoe;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-public class GameActivity extends AppCompatActivity implements View.OnClickListener , iSetNamesDialogListener {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener, SetNamesDialogFragment.iSetNamesDialogListener {
 
     private Button[][] mgridButtons = new Button[3][3];
     private Button mrestartBoard, mrestartGame;
@@ -18,7 +19,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private int count, player1Points, player2Points;
     private TextView player1Score, player2Score;
     private boolean isGridLocked;
-    String dialogName1, dialogName2;
+    String player1Name, player2Name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,10 +163,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void playerWins(boolean turn) {
         if (turn) {
-            Toast toast = Toast.makeText(this, dialogName1 + " wins", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, player1Name + " wins", Toast.LENGTH_SHORT);
             toast.show();
         } else {
-            Toast toast = Toast.makeText(this, dialogName2 + " wins", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, player2Name + " wins", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
@@ -188,11 +189,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         String printedScore2 = String.valueOf(score2);
 
         if (score1 == 0 && score2 == 0) {
-            player1Score.setText(dialogName1 + ": " + printedScore1 + " puntos");
-            player2Score.setText(dialogName2 + ": " + printedScore2 + " puntos");
+            player1Score.setText(player1Name + ": " + printedScore1 + " puntos");
+            player2Score.setText(player2Name + ": " + printedScore2 + " puntos");
         } else {
-            player1Score.setText(dialogName1 + ": " + printedScore1 + " puntos");
-            player2Score.setText(dialogName2 + ": " + printedScore2 + " puntos");
+            player1Score.setText(player1Name + ": " + printedScore1 + " puntos");
+            player2Score.setText(player2Name + ": " + printedScore2 + " puntos");
         }
     }
 
@@ -229,13 +230,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onDialogAcceptClick(DialogFragment dialog, String name1, String name2) {
+        player1Name = name1;
+        player2Name = name2;
 
-        dialogName1 = name1;
-        dialogName2 = name2;
-
-        player1Score.setText(dialogName1 + " 0 puntos");
-        player2Score.setText(dialogName2 + " 0 puntos");
+        player1Score.setText(player1Name + " 0 puntos");
+        player2Score.setText(player2Name + " 0 puntos");
         dialog.dismiss();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        ContentValues gameValues = new ContentValues();
+        gameValues.put("PLAYER1", player1Name);
+        gameValues.put("PLAYER2", player2Name);
+        gameValues.put("SCORE1", player1Points);
+        gameValues.put("SCORE2", player2Points);
+
+        SQLiteOpenHelper gameDbHelper = new GameDbHelper(this);
+        SQLiteDatabase db = gameDbHelper.getWritableDatabase();
+
+        db.insert("GAMES", null, gameValues);
 
     }
 }
