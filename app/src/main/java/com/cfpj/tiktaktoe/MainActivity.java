@@ -13,13 +13,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     public void exitApp(View view){
         finish();
     }
 
-    public void play(View view){
+    public void newGame(View view){
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
+    }
+
+    public void loadGame(View view){
+
     }
 }

@@ -1,4 +1,11 @@
 <resources>
+    <!--MainActivity-->
+    <string name="tv_game_name">Tic Tac Toe</string>
+    <string name="btn_exit">Salir</string>
+    <string name="btn_new_game">Nuevo Juego</string>
+    <string name="btn_load_game">Cargar Juego</string>
+    <string name="copyright">Copyright @2020 Carlos Pinzon(@Carlos_fpj). All right reserved</string>
+
     <!-- GameActivity-->
     <string name="app_name">TicTacToe</string>
     <string name="restart_board">Reiniciar Tablero</string>
@@ -7,12 +14,6 @@
     <string name="text_view_player2">Jugador 2 :</string>
     <string name="default_text_player_1">Jugador 1: 0 puntos</string>
     <string name="default_text_player_2">Jugador 2: 0 puntos</string>
-
-    <!--MainActivity-->
-    <string name="tv_game_name">Tic Tac Toe</string>
-    <string name="btn_exit">Salir</string>
-    <string name="btn_play">Jugar</string>
-    <string name="copyright">Copyright @2020 Carlos Pinzon(@Carlos_fpj). All right reserved</string>
 
     <!--SetNamesDialogFragment-->
     <string name="et_player_1_name">Nombre jugador 1</string>

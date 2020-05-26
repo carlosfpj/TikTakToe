@@ -19,25 +19,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_game_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:src="@drawable/tictactoe_logo"/>
 
     <Button
-        android:id="@+id/btn_play"
+        android:id="@+id/btn_new_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_game_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:onClick="play"
-        android:text="@string/btn_play"/>
+        android:layout_marginTop="15dp"
+        android:onClick="newGame"
+        android:text="@string/btn_new_game"/>
+
+    <Button
+        android:id="@+id/btn_load_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_new_game"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:onClick="loadGame"
+        android:text="@string/btn_load_game"/>
 
     <Button
         android:id="@+id/btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_play"
+        android:layout_below="@id/btn_load_game"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:onClick="exitApp"
         android:text="@string/btn_exit"/>
 
