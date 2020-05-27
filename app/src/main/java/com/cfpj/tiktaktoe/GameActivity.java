@@ -2,10 +2,12 @@ package com.cfpj.tiktaktoe;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private TextView player1Score, player2Score;
     private boolean isGridLocked;
     String player1Name, player2Name;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,10 +251,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameValues.put("SCORE1", player1Points);
         gameValues.put("SCORE2", player2Points);
 
-        SQLiteOpenHelper gameDbHelper = new GameDbHelper(this);
-        SQLiteDatabase db = gameDbHelper.getWritableDatabase();
+        //test ok
+        Log.d(GameActivity.class.toString(), player1Name + player2Name + player1Points + player2Points);
 
-        db.insert("GAMES", null, gameValues);
+        try{
+            SQLiteOpenHelper gameDbHelper = new GameDbHelper(this);
+            //test ok
+            Log.d(GameActivity.class.toString(), gameDbHelper.getDatabaseName());
 
+            db = gameDbHelper.getWritableDatabase();
+            //test ok
+            Log.d(GameActivity.class.toString(), String.valueOf(db.getVersion()));
+
+            db.insert("GAMES", null, gameValues);
+        }
+        catch (SQLiteException e){
+            Log.d(GameActivity.class.toString(), "DATABASE UNAVAILABLE AT CATCHEXCEPTION LINE 269");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 }
