@@ -21,4 +21,7 @@
     <string name="accept">Aceptar</string>
     <string name="noNameAlertMessage">Debes introducir nombres en cada casilla.</string>
 
+    <!--LoadGameActivity-->
+    <string name="tv_tittle">Games Loaded</string>
+
 </resources>

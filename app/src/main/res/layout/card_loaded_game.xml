@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_game_number"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/tv_player1_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_game_number"
+            android:layout_marginStart="10dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/tv_player2_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_player1_name"
+            android:layout_toEndOf="@id/tv_game_number"
+            android:layout_marginStart="10dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/tv_player1_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_player1_name"
+            android:layout_marginStart="10dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/tv_player2_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_player1_name"
+            android:layout_below="@id/tv_player1_score"
+            android:layout_marginStart="10dp"
+            android:text=""/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
