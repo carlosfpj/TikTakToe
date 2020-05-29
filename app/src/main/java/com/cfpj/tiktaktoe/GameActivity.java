@@ -1,6 +1,7 @@
 package com.cfpj.tiktaktoe;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, SetNamesDialogFragment.iSetNamesDialogListener {
 
     private Button[][] mgridButtons = new Button[3][3];
@@ -23,13 +26,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isGridLocked;
     String player1Name, player2Name;
     private SQLiteDatabase db;
+    private int gameId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        bindViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getIntent().getExtras() != null){
+
+            gameId = getIntent().getExtras().getInt("gameId");
+            player1Name = getIntent().getStringExtra("player1Name");
+            player2Name = getIntent().getStringExtra("player2Name");
+            player1Points = getIntent().getExtras().getInt("player1Score");
+            player2Points = getIntent().getExtras().getInt("player2Score");
+            updateScore(player1Points, player2Points);
+        }
 
         if (savedInstanceState != null) {
             bindViews();
@@ -43,7 +58,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 lockGrid();
             }
         }
-        bindViews();
     }
 
     private void bindViews() {
@@ -182,6 +196,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
+        if(getIntent().getExtras() == null) {
+            showDialogFragment();
+        }
+    }
+
+    private void showDialogFragment(){
         DialogFragment dialogFragment = new SetNamesDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "MyDialog");
     }
@@ -252,21 +272,55 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameValues.put("SCORE2", player2Points);
 
         //test ok
-        Log.d(GameActivity.class.toString(), player1Name + player2Name + player1Points + player2Points);
+        Log.d(GameActivity.class.toString(), "Game Id = " + gameId + ", Player 1 = " + player1Name + ", Player 2 = "
+                                                + player2Name + ", Player 1 points = " + player1Points + ", Player 2 points = " + player2Points + ", AT LINE 275");
 
         try{
             SQLiteOpenHelper gameDbHelper = new GameDbHelper(this);
             //test ok
-            Log.d(GameActivity.class.toString(), gameDbHelper.getDatabaseName());
+            Log.d(GameActivity.class.toString(), "DATABASE NAME = " + gameDbHelper.getDatabaseName() + ", AT LINE 281");
 
             db = gameDbHelper.getWritableDatabase();
             //test ok
-            Log.d(GameActivity.class.toString(), String.valueOf(db.getVersion()));
+            Log.d(GameActivity.class.toString(), "DATABASE VERSION = " + String.valueOf(db.getVersion()) + ", AT LINE 285");
 
-            db.insert("GAMES", null, gameValues);
+            Cursor cursor = db.query("GAMES", new String[]{"_id"}, null, null, null, null, null, null);
+            int cursorCount = cursor.getCount();
+            Log.d(GameActivity.class.toString(), "CURSOR COUNT = " + cursorCount + ", AT LINE 289");
+            int[] cursorId = new int[cursorCount];
+
+            if(cursor.moveToFirst()) {
+                do {
+                    for(int i=0; i<cursorCount; i++){
+                        cursorId[i] = cursor.getInt(cursor.getColumnIndex("_id"));
+                        Log.d(GameActivity.class.toString(), "CURSORID = " + String.valueOf(cursorId[i]) + ", AT LINE 295");
+                        cursor.moveToNext();
+                    }
+                }while(cursor.moveToNext());
+            }
+
+            if (cursorCount == 0){
+                db.insert("GAMES", null, gameValues);
+            }else {
+                if(cursor.moveToFirst()){
+                    for(int i=0; i<cursorCount; i++){
+                        if (cursorId[i] != gameId && gameId > 0){
+                            cursor.moveToNext();
+                        }else if (cursorId[i] == gameId && gameId > 0){
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put("SCORE1", player1Points);
+                            contentValues.put("SCORE2", player2Points);
+                            db.update("GAMES", contentValues, "_id = ?", new String[]{String.valueOf(gameId)});
+                        }else if (gameId == -1) {
+                            db.insert("GAMES", null, gameValues);
+                            break;
+                        }
+                    }
+                }
+            }
         }
         catch (SQLiteException e){
-            Log.d(GameActivity.class.toString(), "DATABASE UNAVAILABLE AT CATCHEXCEPTION LINE 269");
+            Log.d(GameActivity.class.toString(), "DATABASE UNAVAILABLE AT CATCHEXCEPTION LINE 318");
         }
     }
 

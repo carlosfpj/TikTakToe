@@ -1,5 +1,6 @@
 package com.cfpj.tiktaktoe;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 public class LoadGameActivity extends AppCompatActivity {
     private static SQLiteDatabase db;
@@ -66,12 +68,28 @@ public class LoadGameActivity extends AppCompatActivity {
                     }
                     while (cursor.moveToNext());
                 }
-                 Log.d(LoadGameActivity.class.toString(), "CATCHING REAL CURSOR VALUES ID AT LINE 68, ID = " + id[0] + id[1]);
+                 //Log.d(LoadGameActivity.class.toString(), "CATCHING REAL CURSOR VALUES ID AT LINE 68, ID = " + id[0] + id[1]);
                  LoadGameAdapter gameAdapter = new LoadGameAdapter(id,player1,player2,score1,score2);
                  RecyclerView gameRecycler = findViewById(R.id.recView_games_loaded);
                  gameRecycler.setAdapter(gameAdapter);
                  RecyclerView.LayoutManager recyclerLayoutManager = new LinearLayoutManager(this);
                  gameRecycler.setLayoutManager(recyclerLayoutManager);
+                 gameAdapter.setListener(new LoadGameAdapter.Listener() {
+                     @Override
+                     public void onClick(int position) {
+                         Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                         intent.putExtra("gameId", id[position]);
+                         intent.putExtra("player1Name", player1[position]);
+                         intent.putExtra("player2Name", player2[position]);
+                         intent.putExtra("player1Score", score1[position]);
+                         intent.putExtra("player2Score", score2[position]);
+                         //TEST OK
+                         Toast toast = Toast.makeText(getApplicationContext(), "Has hecho click en juego " + id[position] + "Jugador1 = " + player1[position], Toast.LENGTH_SHORT );
+                         toast.show();
+                         startActivity(intent);
+
+                     }
+                 });
 
             }else{
                  gamesNoFound();
