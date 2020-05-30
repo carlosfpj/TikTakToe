@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-
 public class GameActivity extends AppCompatActivity implements View.OnClickListener, SetNamesDialogFragment.iSetNamesDialogListener {
 
     private Button[][] mgridButtons = new Button[3][3];
