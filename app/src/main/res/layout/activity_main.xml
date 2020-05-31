@@ -10,8 +10,9 @@
         android:id="@+id/tv_game_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/orbitron_bold"
         android:gravity="center"
-        android:text="@string/tv_game_name"/>
+        android:text="@string/tv_game_name" />
 
     <ImageView
         android:id="@+id/iv_game_logo"
@@ -30,6 +31,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:onClick="newGame"
+        android:fontFamily="@font/orbitron_bold"
         android:text="@string/btn_new_game"/>
 
     <Button
