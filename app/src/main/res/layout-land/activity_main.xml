@@ -17,9 +17,9 @@
         android:id="@+id/iv_game_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TicTacToeImage"
+        android:layout_centerVertical="true"
         android:layout_below="@+id/tv_game_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
         android:src="@drawable/tictactoe_logo"/>
 
     <Button
@@ -27,8 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_game_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_toEndOf="@id/iv_game_logo"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
         android:onClick="newGame"
         android:text="@string/btn_new_game"/>
 
@@ -38,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_new_game"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@id/btn_new_game"
         android:onClick="loadGame"
         android:text="@string/btn_load_game"/>
 
@@ -47,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_load_game"
-        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@id/btn_load_game"
         android:layout_marginTop="50dp"
         android:onClick="exitApp"
         android:text="@string/btn_exit"/>
