@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#EC3838</color>
     <color name="colorPrimaryDark">#3535E9</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#EC3838</color>
 
     <!--TICTACTOE COLORS-->
     <color name="colorCircle">#3535E9</color>

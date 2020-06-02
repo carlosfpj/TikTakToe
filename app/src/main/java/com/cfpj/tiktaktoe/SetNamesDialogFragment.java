@@ -47,7 +47,6 @@ public class SetNamesDialogFragment extends DialogFragment {
         tvAlert = view.findViewById(R.id.tv_alert);
         tvAlert.setVisibility(View.GONE);
         btnAccept = view.findViewById(R.id.btn_accept);
-        builder.setTitle("Introduce los nombres de los jugadores");
         builder.setView(view);
 
         btnAccept.setOnClickListener(new View.OnClickListener() {

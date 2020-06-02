@@ -115,8 +115,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         if (player1Turn) {
+            ((Button)v).setTextColor(getResources().getColor(R.color.colorCross));
             ((Button) v).setText("X");
         } else {
+            ((Button)v).setTextColor(getResources().getColor(R.color.colorCircle));
             ((Button) v).setText("O");
         }
         count++;

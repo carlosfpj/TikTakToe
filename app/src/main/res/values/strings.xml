@@ -4,7 +4,7 @@
     <string name="btn_exit">Salir</string>
     <string name="btn_new_game">Nuevo Juego</string>
     <string name="btn_load_game">Cargar Juego</string>
-    <string name="copyright">Copyright @2020 Carlos Pinzon(@Carlos_fpj). All right reserved</string>
+    <string name="copyright">Copyright @2020 Carlos Pinzon(@Carlos_fpj). Todos los derechos reservados</string>
     <string name="img_content_description">TicTacToe Image</string>
 
     <!-- GameActivity-->
@@ -17,12 +17,13 @@
     <string name="default_text_player_2">Jugador 2: 0 puntos</string>
 
     <!--SetNamesDialogFragment-->
-    <string name="et_player_1_name">Nombre jugador 1</string>
-    <string name="et_player_2_name">Nombre jugador 2</string>
+    <string name="dialog_tittle">Introduzca los nombres de los dos jugadores</string>
+    <string name="et_player_1_name">Jugador 1</string>
+    <string name="et_player_2_name">Jugador 2</string>
     <string name="accept">Aceptar</string>
     <string name="noNameAlertMessage">Debes introducir nombres en cada casilla.</string>
 
     <!--LoadGameActivity-->
-    <string name="tv_tittle">Games Loaded</string>
+    <string name="tv_tittle">Juegos cargados</string>
 
 </resources>

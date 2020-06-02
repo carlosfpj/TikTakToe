@@ -32,6 +32,7 @@
         android:layout_centerHorizontal="true"
         android:drawablePadding="10dp"
         android:drawableStart="@drawable/circle_icon_24"
+        android:background="@drawable/border_button_blue"
         android:onClick="newGame"
         android:text="@string/btn_new_game"/>
 
@@ -43,6 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:drawableStart="@drawable/circle_icon_24"
+        android:background="@drawable/border_button_blue"
         android:drawablePadding="10dp"
         android:onClick="loadGame"
         android:text="@string/btn_load_game"/>
@@ -53,9 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_load_game"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="8dp"
+        android:background="@drawable/border_button_red"
         android:drawableStart="@drawable/cross_icon_24"
-        android:drawablePadding="10dp"
         android:onClick="exitApp"
         android:text="@string/btn_exit"/>
 

@@ -83,11 +83,8 @@ public class LoadGameActivity extends AppCompatActivity {
                          intent.putExtra("player2Name", player2[position]);
                          intent.putExtra("player1Score", score1[position]);
                          intent.putExtra("player2Score", score2[position]);
-                         //TEST OK
-                         Toast toast = Toast.makeText(getApplicationContext(), "Has hecho click en juego " + id[position] + "Jugador1 = " + player1[position], Toast.LENGTH_SHORT );
-                         toast.show();
-                         startActivity(intent);
 
+                         startActivity(intent);
                      }
                  });
 
