@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +18,7 @@
         android:id="@+id/iv_game_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TicTacToeImage"
+        android:contentDescription="@string/img_content_description"
         android:layout_centerVertical="true"
         android:layout_below="@+id/tv_game_name"
         android:src="@drawable/tictactoe_logo"/>
@@ -31,6 +32,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="40dp"
         android:layout_marginStart="60dp"
+        android:drawableStart="@drawable/circle_icon_24"
         android:onClick="newGame"
         android:text="@string/btn_new_game"/>
 
@@ -42,6 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_alignStart="@id/btn_new_game"
+        android:drawableStart="@drawable/circle_icon_24"
         android:onClick="loadGame"
         android:text="@string/btn_load_game"/>
 
@@ -52,6 +55,7 @@
         android:layout_below="@id/btn_load_game"
         android:layout_alignStart="@id/btn_load_game"
         android:layout_marginTop="50dp"
+        android:drawableStart="@drawable/cross_icon_24"
         android:onClick="exitApp"
         android:text="@string/btn_exit"/>
 

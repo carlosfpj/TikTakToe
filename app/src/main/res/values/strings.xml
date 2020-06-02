@@ -5,6 +5,7 @@
     <string name="btn_new_game">Nuevo Juego</string>
     <string name="btn_load_game">Cargar Juego</string>
     <string name="copyright">Copyright @2020 Carlos Pinzon(@Carlos_fpj). All right reserved</string>
+    <string name="img_content_description">TicTacToe Image</string>
 
     <!-- GameActivity-->
     <string name="app_name">TicTacToe</string>

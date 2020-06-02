@@ -27,8 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_game_logo"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:drawableStart="@drawable/circle_icon_24"
+        android:drawablePadding="10dp"
         android:onClick="newGame"
         android:text="@string/btn_new_game"/>
 
@@ -37,9 +38,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_new_game"
-        android:layout_toEndOf="@id/btn_new_game"
-        android:layout_alignBaseline="@id/btn_new_game"
-        android:layout_marginStart="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:drawableStart="@drawable/circle_icon_24"
+        android:drawablePadding="10dp"
         android:onClick="loadGame"
         android:text="@string/btn_load_game"/>
 
@@ -49,7 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_load_game"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/cross_icon_24"
+        android:drawablePadding="10dp"
         android:onClick="exitApp"
         android:text="@string/btn_exit"/>
 
