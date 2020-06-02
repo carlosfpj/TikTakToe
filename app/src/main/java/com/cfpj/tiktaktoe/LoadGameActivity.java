@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 public class LoadGameActivity extends AppCompatActivity {
     private static SQLiteDatabase db;
@@ -94,7 +93,6 @@ public class LoadGameActivity extends AppCompatActivity {
         } catch (SQLiteException e){
             Log.d(LoadGameActivity.class.toString(), "DATABASE UNAVAILABLE");
         }
-
     }
 
     public void gamesNoFound(){
