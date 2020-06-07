@@ -39,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void coloredTitle(){
         String text = getResources().getString(R.string.tv_game_name);
-
         SpannableString ss = new SpannableString(text);
-
         ForegroundColorSpan fcsBlue = new ForegroundColorSpan(getResources().getColor(R.color.colorCircle));
         ForegroundColorSpan fcsRed = new ForegroundColorSpan(getResources().getColor(R.color.colorCross));
 

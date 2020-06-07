@@ -82,8 +82,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             for (int j = 0; j < 3; j++) {
                 String buttonIdPrefix = "button_" + i + j;
                 int resID = getResources().getIdentifier(buttonIdPrefix, "id", "com.cfpj.tiktaktoe");
-                //NumberFormatException
-                //mgridButtons[i][j] = findViewById(Integer.valueOf(buttonIdPrefix));
                 mgridButtons[i][j] = findViewById(resID);
                 mgridButtons[i][j].setOnClickListener(this);
             }
@@ -271,29 +269,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameValues.put("SCORE1", player1Points);
         gameValues.put("SCORE2", player2Points);
 
-        //test ok
-        Log.d(GameActivity.class.toString(), "Game Id = " + gameId + ", Player 1 = " + player1Name + ", Player 2 = "
-                                                + player2Name + ", Player 1 points = " + player1Points + ", Player 2 points = " + player2Points + ", AT LINE 275");
 
         try{
             SQLiteOpenHelper gameDbHelper = new GameDbHelper(this);
-            //test ok
-            Log.d(GameActivity.class.toString(), "DATABASE NAME = " + gameDbHelper.getDatabaseName() + ", AT LINE 281");
 
             db = gameDbHelper.getWritableDatabase();
-            //test ok
-            Log.d(GameActivity.class.toString(), "DATABASE VERSION = " + String.valueOf(db.getVersion()) + ", AT LINE 285");
 
             Cursor cursor = db.query("GAMES", new String[]{"_id"}, null, null, null, null, null, null);
             int cursorCount = cursor.getCount();
-            Log.d(GameActivity.class.toString(), "CURSOR COUNT = " + cursorCount + ", AT LINE 289");
             int[] cursorId = new int[cursorCount];
 
             if(cursor.moveToFirst()) {
                 do {
                     for(int i=0; i<cursorCount; i++){
                         cursorId[i] = cursor.getInt(cursor.getColumnIndex("_id"));
-                        Log.d(GameActivity.class.toString(), "CURSORID = " + String.valueOf(cursorId[i]) + ", AT LINE 295");
                         cursor.moveToNext();
                     }
                 }while(cursor.moveToNext());
