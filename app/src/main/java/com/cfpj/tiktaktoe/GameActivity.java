@@ -238,6 +238,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         return isGridLocked;
     }
 
+    /**
+     * set blank all the button's content
+     * @param view
+     */
     public void restartGame(View view) {
         player1Points = 0;
         player2Points = 0;
